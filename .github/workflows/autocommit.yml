@@ -2,7 +2,7 @@ name: Auto Commit
 
 on:
   schedule:
-    - cron: '0 7 * * *'  # Menjalankan setiap hari pada jam 07:00 UTC
+    - cron: '0 0 * * *'  # Menjalankan setiap hari pada jam 00:00 UTC (7 pagi WIB)
   push:
     branches:
       - main  # Menjalankan juga ketika ada push ke branch main
