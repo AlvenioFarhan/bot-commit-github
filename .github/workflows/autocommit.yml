@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3  # Menggunakan versi terbaru
 
       - name: Update content
         run: |
@@ -27,3 +27,11 @@ jobs:
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Debugging Info
+        run: |
+          git status
+          git log -1
+          
+      - name: Check Disk Space
+        run: df -h
