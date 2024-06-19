@@ -18,6 +18,14 @@ jobs:
         run: |
           echo "This is an auto-generated commit on $(date)" >> update_log.txt
 
+      - name: Debugging Info
+        run: |
+          git status
+          git log -1
+
+      - name: Check Disk Space
+        run: df -h
+
       - name: Commit changes
         run: |
           git config --global user.name 'github-actions[bot]'
@@ -27,11 +35,3 @@ jobs:
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-      - name: Debugging Info
-        run: |
-          git status
-          git log -1
-          
-      - name: Check Disk Space
-        run: df -h
