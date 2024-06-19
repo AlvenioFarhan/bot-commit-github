@@ -7,31 +7,34 @@ on:
     branches:
       - main  # Menjalankan juga ketika ada push ke branch main
 
+permissions:
+  contents: write  # Memberikan izin write pada contents
+
 jobs:
   commit:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Menentukan runner yang akan digunakan, dalam hal ini Ubuntu versi terbaru
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3  # Menggunakan versi terbaru
+        uses: actions/checkout@v3  # Menggunakan action checkout versi 3 untuk mengkloning repository
 
       - name: Update content
         run: |
-          echo "This is an auto-generated commit on $(date)" >> update_log.txt
+          echo "This is an auto-generated commit on $(date)" >> update_log.txt  # Menambahkan baris baru ke file update_log.txt
 
       - name: Debugging Info
         run: |
-          git status
-          git log -1
+          git status  # Menampilkan status git untuk debugging
+          git log -1  # Menampilkan log commit terakhir untuk debugging
 
       - name: Check Disk Space
-        run: df -h
+        run: df -h  # Memeriksa ruang disk yang tersedia
 
       - name: Commit changes
         run: |
-          git config --global user.name 'AlvenioFarhan'
-          git config --global user.email 'alveniofarhan@gmail.com'
-          git add .
-          git commit -m "Auto commit on $(date)"
-          git push
+          git config --global user.name 'AlvenioFarhan'  # Mengatur nama user git
+          git config --global user.email 'alveniofarhan@gmail.com'  # Mengatur email user git
+          git add .  # Menambahkan semua perubahan ke staging area
+          git commit -m "Auto commit on $(date)"  # Membuat commit dengan pesan yang menyertakan tanggal
+          git push  # Mendorong perubahan ke repository
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}  # Menggunakan Personal Access Token untuk otentikasi
